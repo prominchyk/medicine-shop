@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ua"> 
+    <meta charset="UTF-8">
+    <title>Shopping-cart</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+           
+</head>
+<body>
+    <header>
+        The Medicine Delivery Shops
+    </header>
+    <nav id="menu">
+        <a href="index.html">Shop</a>
+        <span><b>|</b></span>
+        <a href="shopping-cart.html" class="active">Shopping Cart</a>
+    </nav>
+    <main>
+        <div class="userData">
+            <form action="" method="POST">
+                <p>Name:</p>
+                <input name="name">
+                <p>Email:</p>
+                <input name="email">
+                <p>Phone:</p>
+                <input name="phone">
+                <p>Address:</p>
+                <input name="address">
+                <input type="submit" class="submit" value="Submit">
+            </form>
+        </div>
+        <div class="order">
+            <p>Chosen medicine:</p>
+            <div class="medicineInCart"></div>
+        </div>
+       
+        
+    </main>
+    <p class="totalCost">Total price: </p>
+
+    <script src="shopping-cart.js"></script>
+
+</body>
+
+
+</html>

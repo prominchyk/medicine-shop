@@ -1,0 +1,208 @@
+body {
+    margin: 0 auto;
+    margin-top: 1%;
+    width: 80vw;
+    min-height: 90%;
+}
+
+header {
+    width: 100%;
+    height: 11vh;
+    padding-top: 0.5%;
+    text-align: center;
+    font-size: 150%;
+}
+
+#menu a {
+    padding: 2%;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 75vh;
+}
+
+.shops {
+    margin-top: 2%;
+    width: 20%;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-right: 2%;
+}
+
+.shops p, .order p {
+    text-align: center;
+    font-weight: bold;
+}
+
+.medicins {
+    margin-top: 2%;
+    width: 80%;
+    border: 1px solid grey;
+    border-radius: 10px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.medicineInCart {
+    margin-top: 2%;
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 10px;
+}
+
+.medicineItem {
+    margin-top: 1%;
+    width: 80%;
+    height: 70px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.medicineItem .medicineShop {
+    text-align: left;
+    font-size: 80%;
+    line-height: 1%;
+}
+
+.medicineItem .medicineName {
+    text-align: left;
+    font-size: 110%;
+    line-height: 1%;
+}
+
+.medicineItem .cartPrice {
+    line-height: 1%;
+    
+    
+}
+
+.medicineItem .medicineCount {
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 30%;
+    height: 45%;
+    text-align: center;
+    float: right;
+    margin-right: 5%;
+    margin-top: -10%;
+}
+
+.medicineItem .upButton {
+    width: 15px;
+    height: 13px;
+    border: 1px solid grey;
+    font-size: 70%;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 80%;
+    margin-top: -16%;
+    cursor: pointer;
+}
+
+.medicineItem .downButton {
+    width: 15px;
+    height: 13px;
+    border: 1px solid grey;
+    font-size: 70%;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 80%;
+    cursor: pointer;
+}
+
+.userData {
+    height: 60vh;
+    margin-top: 2%;
+    width: 35%;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-right: 2%;
+}
+
+.userData form {
+    margin-left: 3%;
+}
+
+.userData input {
+    width: 70%;
+}
+
+.order {
+    margin-top: 2%;
+    width: 45%;
+    height: 60vh;
+    border: 1px solid grey;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.activeShop {
+    background-color: gainsboro;
+}
+
+.itemShop {
+    border: 1px solid grey;
+    margin: 5% auto;
+    width: 70%;
+    text-align: center;
+    padding: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.totalCost {
+    font-size: 120%;
+    font-weight: bold;
+    margin-left: 40%;
+    margin-top: -3%;
+}
+
+.medicins button {
+    display: inline-block;
+    border-radius: 5px;
+    margin-left: 60%;
+    cursor: pointer;
+}
+
+.medicins p {
+    font-weight: bold;
+    margin-left: 3%;
+}
+
+.medicins img {
+    display: inline-block;
+    width: 80%;
+    height: 40%;
+    margin-left: 10%;
+    margin-top: 5%;
+    background-color: rgb(243, 240, 240);
+}
+
+.itemMedicament {
+    width: 35%;
+    height: 215px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 2%;
+    margin-right: 7%;
+    margin-left: 7%;
+}
+
+.userData .submit {
+    width: 150px;
+    height: 35px;
+    position: absolute;
+    left: 60%;
+    top: 85%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-weight: bold;
+}
