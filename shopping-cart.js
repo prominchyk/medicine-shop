@@ -43,7 +43,11 @@ if(orderArr) {
         medicineItem.append(medicineCount);
         medicineInCart.append(medicineItem);
 
-        up.addEventListener('click', function() {
+        up.addEventListener('click', function addCounter() {
+            if(medicineItem.classList.contains('canceled')) {
+                up.removeEventListener('click', addCounter);
+                counter -= 2;
+            }
             totalSum = 0;
             totalCost.textContent = 'Total price: ';
             counter++;
@@ -52,15 +56,18 @@ if(orderArr) {
             calculateTotalSum();
         })
 
-        down.addEventListener('click', function() {
+        down.addEventListener('click', function subCounter() {
             totalSum = 0;
             totalCost.textContent = 'Total price: ';
             counter--;
             counterText.textContent = counter;
             price.innerHTML = 'Price: <span class="medSum">' + (orderItem.medPrice * counter).toFixed(2) + '<span> $';
-            if(counter < 1) {
+            if(counter <= 0) {
+                counter++;
                 orderArr.splice(orderArr.indexOf(orderItem), 1);
                 localStorage.setItem('order', JSON.stringify(orderArr));
+                medicineItem.classList.add('canceled');
+                down.removeEventListener('click', subCounter);
             }
             calculateTotalSum();
         })

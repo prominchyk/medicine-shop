@@ -172,6 +172,10 @@ main {
     cursor: pointer;
 }
 
+.medicins button:hover {
+    background-color: aquamarine;
+}
+
 .medicins p {
     font-weight: bold;
     margin-left: 3%;
@@ -205,4 +209,8 @@ main {
     border: 1px solid grey;
     border-radius: 5px;
     font-weight: bold;
+}
+
+.canceled {
+    background-color: rgb(249, 167, 167);
 }
