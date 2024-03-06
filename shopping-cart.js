@@ -3,11 +3,11 @@
 let medicineInCart = document.querySelector('.medicineInCart');
 let orderArr = JSON.parse(localStorage.getItem('order'));
 let totalCost = document.querySelector('.totalCost');
-let counter = 1;
 let totalSum = 0;
 
 if(orderArr) {
     for(let orderItem of orderArr) {
+        let counter = 1;
         let medicineItem = document.createElement('div');
         medicineItem.classList.add('medicineItem');
 
