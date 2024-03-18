@@ -3,11 +3,20 @@
 let medicineInCart = document.querySelector('.medicineInCart');
 let orderArr = JSON.parse(localStorage.getItem('order'));
 let totalCost = document.querySelector('.totalCost');
-let totalSum = 0;
+let totalSum = 0; 
+let form = document.querySelector('form');
+let formName = document.querySelector('#formName');
+let formPhone = document.querySelector('#formPhone');
+let formEmail = document.querySelector('#formEmail');
+let formAddress = document.querySelector('#formAddress');
+let formOrder = document.querySelector('#formOrder');
+let nameMessage = document.querySelector('.nameMessage');
+let phoneMessage = document.querySelector('.phoneMessage');
 
 if(orderArr) {
     for(let orderItem of orderArr) {
-        let counter = 1;
+        //let counter = 1;
+        let counter = orderItem.count;
         let medicineItem = document.createElement('div');
         medicineItem.classList.add('medicineItem');
 
@@ -23,7 +32,7 @@ if(orderArr) {
 
         let price = document.createElement('span');
         price.classList.add('cartPrice');
-        price.innerHTML = 'Price: <span class="medSum">' + orderItem.medPrice.toFixed(2) + '<span> $';
+        price.innerHTML = 'Price: <span class="medSum">' + Number(orderItem.medPrice).toFixed(2) + '<span> $';
         medicineItem.append(price);
 
         let medicineCount = document.createElement('div');
@@ -52,6 +61,8 @@ if(orderArr) {
             totalCost.textContent = 'Total price: ';
             counter++;
             counterText.textContent = counter;
+            orderItem.count = counter;
+            localStorage.setItem('order', JSON.stringify(orderArr));
             price.innerHTML = 'Price: <span class="medSum">' + (orderItem.medPrice * counter).toFixed(2) + '<span> $';
             calculateTotalSum();
         })
@@ -61,6 +72,8 @@ if(orderArr) {
             totalCost.textContent = 'Total price: ';
             counter--;
             counterText.textContent = counter;
+            orderItem.count = counter;
+            localStorage.setItem('order', JSON.stringify(orderArr));
             price.innerHTML = 'Price: <span class="medSum">' + (orderItem.medPrice * counter).toFixed(2) + '<span> $';
             if(counter <= 0) {
                 counter++;
@@ -83,5 +96,28 @@ function calculateTotalSum() {
 }
 
 calculateTotalSum();
+
+form.addEventListener('submit', function(event) {
+    if(!(/^[a-zA-Z]+\s[a-zA-Z]+$/.test(formName.value))) {
+        event.preventDefault();
+        nameMessage.textContent = 'Check Your name and surname.';
+        console.log (formName.value);
+    }
+    else if(!(/^\+\d{10,}$/.test(formPhone.value))) {
+        event.preventDefault();
+        phoneMessage.textContent = 'Check Your phone number. Start with \'+\'.';
+        console.log (formPhone.value);
+    }
+    else {
+        event.preventDefault();
+        formOrder.value = localStorage.getItem('order');
+        form.submit();
+        localStorage.clear('order');
+    }
+})
+
+
+
+
 
 

@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        The Medicine Delivery Shops
+        The Medicine Delivery Shops 
     </header>
     <nav id="menu">
         <a href="index.html">Shop</a>
@@ -16,15 +16,18 @@
     </nav>
     <main>
         <div class="userData">
-            <form action="" method="POST">
-                <p>Name:</p>
-                <input name="name">
+            <form action="http://medicin-shop-server/" method="POST">
+                <p>Name, Surname*:</p>
+                <input name="name" id="formName" placeholder="Name Surname">
+                <p class="nameMessage"></p>
                 <p>Email:</p>
-                <input name="email">
-                <p>Phone:</p>
-                <input name="phone">
+                <input name="email" id="formEmail" placeholder="example@test.com">
+                <p>Phone*:</p>
+                <input name="phone" id="formPhone" placeholder="+380000000000">
+                <p class="phoneMessage"></p>
                 <p>Address:</p>
-                <input name="address">
+                <input name="address" id="formAddress" placeholder="132, My Street, My City, My State 00000">
+                <input name="order" id="formOrder">
                 <input type="submit" class="submit" value="Submit">
             </form>
         </div>
