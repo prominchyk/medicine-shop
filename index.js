@@ -12,7 +12,7 @@ if(!localStorage.getItem('order')) {
     order = JSON.parse(localStorage.getItem('order'));
 }
 
-fetch('http://medicin-shop-server/shops.php').then(responseShops => {
+fetch('http://medicin-shop-server/shopsSaved.php').then(responseShops => {
     return responseShops.json();
 }).then(dataShops => {
     contentShops = dataShops;
@@ -42,7 +42,7 @@ fetch('http://medicin-shop-server/shops.php').then(responseShops => {
             })
         }
     }
-    fetch('http://medicin-shop-server/content.php').then(response => {
+    fetch('http://medicin-shop-server/contentSaved.php').then(response => {
     return response.json();
 }).then(data => {
     content = data;
