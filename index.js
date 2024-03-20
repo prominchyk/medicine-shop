@@ -4,15 +4,19 @@ let contentShops = '';
 let divShops = document.querySelector('.shops');
 let divMedicins = document.querySelector('.medicins');
 let itemShops = document.getElementsByClassName('itemShop');
+let numberProduct = document.querySelector('.numberProduct');
 
 let order;
+let number;
 if(!localStorage.getItem('order')) {
     order = [];
+    number = 0;
 } else {
     order = JSON.parse(localStorage.getItem('order'));
+    number = localStorage.getItem('number')
 }
 
-fetch('http://medicin-shop-server/shopsSaved.php').then(responseShops => {
+fetch('http://medicin-shop-server/shops.php').then(responseShops => {
     return responseShops.json();
 }).then(dataShops => {
     contentShops = dataShops;
@@ -42,7 +46,7 @@ fetch('http://medicin-shop-server/shopsSaved.php').then(responseShops => {
             })
         }
     }
-    fetch('http://medicin-shop-server/contentSaved.php').then(response => {
+    fetch('http://medicin-shop-server/content.php').then(response => {
     return response.json();
 }).then(data => {
     content = data;
@@ -67,6 +71,7 @@ for(let elem of contentShops) {
             itemMedicament.append(buttonCart);
             divMedicins.append(itemMedicament);
             if(order.length > 0) {
+                numberProduct.textContent = order.length;
                 for(let itemOrder of order) {
                     if(itemOrder.active && itemOrder.medName === nameMed.textContent) {
                         buttonCart.classList.add('activeButtonCart');
@@ -85,9 +90,11 @@ for(let elem of contentShops) {
                     } 
                 }
                 if(flag === false) {
+                    numberProduct.textContent++;
                     order.push({'shopName': elem.name, 'medName': itemMedicine.name, 'medPrice': itemMedicine.price, 'picture': itemMedicine.picture, 'active': true, 'count': 1});
                 }
                 localStorage.setItem('order', JSON.stringify(order));
+                localStorage.setItem('number', numberProduct.textContent);
             })
         }
     }
@@ -113,6 +120,7 @@ for(let elem of itemShops) {
             itemMedicament.append(buttonCart);
             divMedicins.append(itemMedicament);
             if(order.length > 0) {
+                numberProduct.textContent = order.length;
                 for(let itemOrder of order) {
                     if(itemOrder.active && itemOrder.medName === nameMed.textContent) {
                         buttonCart.classList.add('activeButtonCart');
@@ -131,9 +139,11 @@ for(let elem of itemShops) {
                     } 
                 }
                 if(flag === false) {
+                    numberProduct.textContent++;
                     order.push({'shopName': elem.textContent, 'medName': itemMedicine.name, 'medPrice': itemMedicine.price, 'picture': itemMedicine.picture, 'active': true, 'count': 1});
                 }
                 localStorage.setItem('order', JSON.stringify(order));
+                localStorage.setItem('number', numberProduct.textContent);
             })
         }
         }
