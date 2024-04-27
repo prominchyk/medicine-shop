@@ -150,7 +150,7 @@ for(let elem of itemShops) {
     })
 }
 })
-});
+}).catch(error => alert('Connection error. Please try again later'));
 
 
 
