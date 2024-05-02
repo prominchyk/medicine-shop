@@ -17,7 +17,7 @@ if (!localStorage.getItem('order')) {
     number = localStorage.getItem('number')
 }
 
-const createItemMedicament = (parent, domElem) => {
+const createItemMedicament = (parent, domElem) => { 
     let itemMedicament = document.createElement('div');
     itemMedicament.classList.add('itemMedicament');
     let pictureMed = document.createElement('img');
@@ -44,23 +44,79 @@ const createItemMedicament = (parent, domElem) => {
     }
 }
 
+const sortItemMedicament = (targetOption, targetShop, domElem) => {
+    let newContent = [...content];
+            domElem.innerHTML = '';
+            if (targetOption.selectedIndex === 0) {
+                sortNameAZ(newContent);
+            } if (targetOption.selectedIndex === 1) {
+                sortNameZA(newContent);
+            } if (targetOption.selectedIndex === 2) {
+                sortPriceMinMax(newContent);
+            } if (targetOption.selectedIndex === 3) {
+                sortPriceMaxMin(newContent);
+            }
+    for (let itemMedicine of newContent) {
+        if (targetShop === itemMedicine.shop) {
+            console.log(itemMedicine);
+            createItemMedicament(itemMedicine, domElem); 
+        }                    
+    }
+}
+   
+function sortNameZA(arr) {
+    return arr.sort(function (a, b) {
+        if (a.name > b.name) {
+          return -1;
+        }
+        if (a.name < b.name) {
+          return 1;
+        }
+        return 0;
+      })
+}
+
+function sortNameAZ(arr) {
+    return arr.sort(function (a, b) {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      })
+}
+
+function sortPriceMinMax(arr) {
+    return arr.sort(function (a, b) {
+        return a.price - b.price;
+      })
+}
+
+function sortPriceMaxMin(arr) {
+    return arr.sort(function (a, b) {
+        return b.price - a.price;
+      })
+}
+
 const buttonCartClickHandler = (button, parent, elem) => {
-        button.classList.add('activeButtonCart');
-        let flag = false;
-        if (order.length > 0) {
-            for (let itemOrder of order) {
-                if(itemOrder.medName === parent.name && itemOrder.shopName === el.name) {
-                    flag = true;
-                    break;
-                }
-            } 
-        }
-        if(flag === false) {
-            numberProduct.textContent++;
-            order.push({'shopName': elem.name, 'medName': parent.name, 'medPrice': parent.price, 'picture': parent.picture, 'active': true, 'count': 1});
-        }
-        localStorage.setItem('order', JSON.stringify(order));
-        localStorage.setItem('number', numberProduct.textContent);
+    button.classList.add('activeButtonCart');
+    let flag = false;
+    if (order.length > 0) {
+        for (let itemOrder of order) {
+            if(itemOrder.medName === parent.name && itemOrder.shopName === el.name) {
+                flag = true;
+                break;
+            }
+        } 
+    }
+    if(flag === false) {
+        numberProduct.textContent++;
+        order.push({'shopName': elem.name, 'medName': parent.name, 'medPrice': parent.price, 'picture': parent.picture, 'active': true, 'count': 1});
+    }
+    localStorage.setItem('order', JSON.stringify(order));
+    localStorage.setItem('number', numberProduct.textContent);
 }
 
 fetch('http://medicin-shop-server/shopsSaved.php').then(responseShops => {
@@ -97,22 +153,27 @@ fetch('http://medicin-shop-server/shopsSaved.php').then(responseShops => {
     return response.json();
 }).then(data => {
     content = data;
-
+    sortNameAZ(content);
+    let sortSelect = document.querySelector('select');
 for (let elem of contentShops) {
     if (elem.activeShop) {
         for (let itemMedicine of content) {
             if (elem.name === itemMedicine.shop) {
-                createItemMedicament(itemMedicine, divMedicins);
+                createItemMedicament(itemMedicine, divMedicins, elem);
                 buttonCart.addEventListener('click', function(event) {
                     buttonCartClickHandler(event.target, itemMedicine, elem);
                 })
-            
             }
         }
+        sortSelect.addEventListener('change', function(event) {
+            sortItemMedicament(event.target, elem.name, divMedicins);
+        })
     } 
+         
 }
 for (let elem of itemShops) {
     elem.addEventListener('click', function() {
+        sortSelect.selectedIndex = 0;
         for (let itemMedicine of content) {
             if (elem.textContent === itemMedicine.shop) {
                 createItemMedicament(itemMedicine, divMedicins);
@@ -120,11 +181,13 @@ for (let elem of itemShops) {
                     buttonCartClickHandler(event.target, itemMedicine, elem);
                 })
             }
+            sortSelect.addEventListener('change', function(event) {
+                sortItemMedicament(event.target, elem.textContent, divMedicins);
+            })
         }
     })
 }
 })
 }).catch(error => alert('Connection error. Please try again later'));
-
 
 
